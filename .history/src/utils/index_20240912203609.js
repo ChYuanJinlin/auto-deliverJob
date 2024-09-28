@@ -2,8 +2,8 @@
  * @Author: yuanjinlin 1075360356@qq.com
  * @Date: 2024-09-05 16:33:07
  * @LastEditors: yuanjinlin 1075360356@qq.com
- * @LastEditTime: 2024-09-12 20:36:12
- * @FilePath: \yjl-blogd:\qianduan\auto-deliver\src\utils\index.js
+ * @LastEditTime: 2024-09-12 16:42:16
+ * @FilePath: \yjl-blog\auto-deliver\src\utils\index.js
  * @Description:
  *
  * Copyright (c) 2024 by ${git_name_email}, All Rights Reserved.

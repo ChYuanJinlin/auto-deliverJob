@@ -2,7 +2,7 @@
  * @Author: yuanjinlin 1075360356@qq.com
  * @Date: 2024-09-04 10:48:20
  * @LastEditors: yuanjinlin 1075360356@qq.com
- * @LastEditTime: 2024-09-27 19:57:15
+ * @LastEditTime: 2024-09-23 14:57:22
  * @FilePath: \yjl-blogd:\qianduan\auto-deliver\src\main.js
  * @Description:
  *
@@ -10,7 +10,7 @@
  */
 import puppeteer from "puppeteer";
 import axios from "axios";
-import inquirer from "inquirer";             
+import inquirer from "inquirer";
 import { request, sleep, on, pageLog } from "./utils/index.js";
 const config = {
   // 匹配的职位的关键词
@@ -32,7 +32,7 @@ const config = {
   ],
   citys: ["成都"],
   // 需要过滤职位包含的关键词
-filterJob: [],
+  filterJob: [],
   // 发消息的内容
   content:
     " 你好，我是一个拥有五年经验前端开发者，包括开发过pc页面，小程序，混合app，h5可视化大屏，以及桌面端的开发经验，可以直接上手项目，希望公司可以给一个机会，让我加入公司并肩作战，谢谢",
@@ -406,7 +406,6 @@ class Boss {
       }
     );
   }
-  // todo 抽离
   async login() {
     try {
       // 点击登录

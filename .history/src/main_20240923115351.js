@@ -2,7 +2,7 @@
  * @Author: yuanjinlin 1075360356@qq.com
  * @Date: 2024-09-04 10:48:20
  * @LastEditors: yuanjinlin 1075360356@qq.com
- * @LastEditTime: 2024-09-27 19:57:15
+ * @LastEditTime: 2024-09-23 11:53:51
  * @FilePath: \yjl-blogd:\qianduan\auto-deliver\src\main.js
  * @Description:
  *
@@ -10,7 +10,7 @@
  */
 import puppeteer from "puppeteer";
 import axios from "axios";
-import inquirer from "inquirer";             
+import inquirer from "inquirer";
 import { request, sleep, on, pageLog } from "./utils/index.js";
 const config = {
   // 匹配的职位的关键词
@@ -32,7 +32,7 @@ const config = {
   ],
   citys: ["成都"],
   // 需要过滤职位包含的关键词
-filterJob: [],
+  filterJob: [],
   // 发消息的内容
   content:
     " 你好，我是一个拥有五年经验前端开发者，包括开发过pc页面，小程序，混合app，h5可视化大屏，以及桌面端的开发经验，可以直接上手项目，希望公司可以给一个机会，让我加入公司并肩作战，谢谢",
@@ -71,8 +71,6 @@ class Boss {
       this.browser = await puppeteer.connect({
         headless: false,
         browserWSEndpoint: wsKey.data.webSocketDebuggerUrl,
-        timeout: 0, // 如果需要的话，设置启动超时时间
-        protocolTimeout: 0, // 设置协议超时时间为 30 秒
         defaultViewport: null,
         executablePath: "C:/Program Files/Google/Chrome/Application",
         ignoreDefaultArgs: ["--disable-extensions"],
@@ -299,19 +297,12 @@ class Boss {
 
             isProcessingQueue = true; // 标记为正在处理队列
             (async function processNextItem() {
-              // 有没有没有更多了
-              let noMoreEl = document.querySelector(
-                "#container > div > div > div.list-warp > div > div.chat-content > div > div > div:nth-child(3) > div > div"
-              );
-
               // 关闭弹窗
               document
                 .querySelector(
                   ".boss-popup__wrapper.boss-dialog.boss-dialog__wrapper.dialog-default.primitive.dialog-icon__default > div.boss-popup__close"
                 )
                 ?.click();
-              console.log("clickQueue---", clickQueue);
-
               if (!clickQueue.length) {
                 content.scrollTo(0, content.scrollTop + 500);
 
@@ -345,10 +336,8 @@ class Boss {
                       await sendResume();
                     } else if (!new RegExp(jobNames, "gi").test(positionName)) {
                       // 删除不匹配的岗位
-                      let element = item.firstChild.children[1]?.children[2];
-                      element = element?.children[2]
-                        ? element?.children[2]
-                        : element?.children[1];
+                      const element =
+                        item.firstChild.children[1]?.children[2]?.children[1];
                       // 触发 mouseenter 事件
                       var event = new MouseEvent("mouseenter", {
                         view: window,
@@ -406,7 +395,6 @@ class Boss {
       }
     );
   }
-  // todo 抽离
   async login() {
     try {
       // 点击登录
@@ -626,5 +614,5 @@ class Boss {
 const page = new Boss();
 await page.run();
 await page.login();
-// await page.deliverResume();
-await page.sendInfos();
+await page.deliverResume();
+// await page.sendInfos();
